@@ -2,6 +2,7 @@ from .base_page import BasePage
 from locators.main_locators import MainLocators 
 from .customers_page import CustomersPage 
 from .add_customer_page import AddCustomerPage
+from config import URL 
 import json
 
 class MainPage(BasePage):
@@ -10,7 +11,7 @@ class MainPage(BasePage):
         
     def open_page(self):
         """Открыть страницу"""
-        self.open("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager")
+        self.open(URL)
 
     def click_add_customer(self, driver): 
         """Метод нажимает кнопку добавить клиента"""
