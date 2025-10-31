@@ -560,9 +560,9 @@ FodyWeavers.xsd
 .history/
 
 # Allure
-allure-results/
+allure-result/
 allure-report/
-.allure/
+.allure-/
 
 # Windows Installer files from build outputs
 *.cab
