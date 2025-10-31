@@ -2,12 +2,9 @@ import pytest
 from selenium import webdriver 
 from pages.main_page import MainPage
 
-@pytest.fixture(scope = 'session',autouse=True)
+@pytest.fixture(scope = 'function',autouse=True)
 def driver():
-    options = webdriver.ChromeOptions()
-    #options.page_load_strategy = 'eager'  # Не ждать полной загрузки всех ресурсов
-
-    driver = webdriver.Chrome(options=options)
+    driver = webdriver.Chrome()
     driver.set_page_load_timeout(90)
     driver.maximize_window()
     

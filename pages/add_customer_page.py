@@ -1,5 +1,6 @@
 import random
 from .base_page import BasePage  
+from .customers_page import CustomersPage 
 from locators.add_customer_locators import AddCustomerLocators
 
 class AddCustomerPage(BasePage):
@@ -8,6 +9,11 @@ class AddCustomerPage(BasePage):
         self.current_post_code = None 
         self.name = None
 
+    def click_customers(self, driver): 
+        """Метод нажимает кнопку просмотра клиентов"""
+        self.click_element(AddCustomerLocators.customers_button)
+        return CustomersPage(driver)
+    
     def generate_post_code(self): 
         """Генерирует номер из 10 цифр для поля Post Code"""
         self.current_post_code = ''.join([str(random.randint(0, 9)) for _ in range(10)])
@@ -44,14 +50,15 @@ class AddCustomerPage(BasePage):
     def fill_first_name(self):
         """Заполнить поле first_name"""
         first_name = self.post_code_to_first_name()
-        return self.fill_field(AddCustomerLocators.first_name_input, first_name) 
+        self.fill_field(AddCustomerLocators.first_name_input, first_name) 
+        return first_name
     
     def fill_last_name(self):
         """Заполнить поле last_name"""
         last_name = self.get_current_name()
         return self.fill_field(AddCustomerLocators.last_name_input, last_name) 
     
-    def fill_post_code(self, name):
+    def fill_post_code(self):
         """Заполнить поле post_code""" 
         post_code = self.generate_post_code()
         return self.fill_field(AddCustomerLocators.post_code_input, post_code)
@@ -60,6 +67,6 @@ class AddCustomerPage(BasePage):
         """Метод нажимает кнопку добавления клиента"""
         self.click_element(AddCustomerLocators.add_customer_button)
 
-    def get_message_text(self):
+    def close_allert(self):
         """Получить текст сообщения (возвращает str)"""
-        return self.get_alert_text()
+        return self.allert_close()
