@@ -1,4 +1,3 @@
-import time
 from .base_page import BasePage  
 from locators.customers_locators import CustomersLocators 
 
@@ -18,7 +17,7 @@ class CustomersPage(BasePage):
 
     def get_text_from_first_names(self):
         """
-        Получить текст с элементов, проверить сортировку
+        Метод возврашает список всех имен
 
         """
         # Находим все элементы
@@ -45,7 +44,9 @@ class CustomersPage(BasePage):
             return False
         
     def find_closest_to_average_index(self):
-    
+        """
+        Метод возврашает имя и индекс, которое самое близкое по длине среднему арифметическому длин всех имен
+        """
         names = self.get_text_from_first_names()
 
         # Вычисляем длины всех слов
@@ -67,10 +68,14 @@ class CustomersPage(BasePage):
         return names[closest_index], closest_index
     
     def click_delete_by_index(self, index): 
+        """
+        Метод выполняет нажатие на кнопку Delete по индексу
+        """
         elements = self.find_elements(CustomersLocators.delete_buttons) 
         self.click_web_element(elements[index]) 
 
     def checking_for_deletion(self, name): 
+        """Метод проверяет, что пользователь был удален"""
         try:
             self.fill_field(CustomersLocators.search_input, name) 
             self.find_elements(CustomersLocators.first_names,timeout = 3)
@@ -79,6 +84,9 @@ class CustomersPage(BasePage):
             return True
         
     def checking_for_addetion(self, name): 
+        """
+        Метод проверяет, что пользователь был добавлен
+        """
         try:
             self.fill_field(CustomersLocators.search_input, name) 
             names = self.get_text_from_first_names() 

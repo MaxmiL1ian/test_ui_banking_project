@@ -14,7 +14,9 @@ def driver():
 
 @pytest.fixture(scope = 'function')
 def main_page(driver):
-    """Фикстура для открытия страницы"""
+    """
+    Фикстура для открытия страницы
+    """
     page = MainPage(driver)
     page.open_page()  # Открываем страницу
     return page
